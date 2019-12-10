@@ -103,10 +103,10 @@ $handle = fopen(dirname(__FILE__)."/$resultFile", 'a');
         $result = curl_exec($ch);
 
         $productName = str_replace($delim, "", getStr('name="title" content="', '"', $result));
-        //$productDesc = str_replace($delim, "", getStr('"description": "', '"', $result));
+        $productDesc = str_replace($delim, "", getStr('"description": "', '"', $result));
         $productPrice = str_replace($delim, "", getStr('property="twitter:data1" content="', '"', $result));
         $productImage = str_replace($delim, "", getStr('img alt="Product" src="', '"', $result));
-        fwrite($handle, "$productNo$delim$productName$delim$productPrice$delim$productURL$delim$productImage\n");
+        fwrite($handle, "$productNo$delim$productName$delim$productDesc$delim$productPrice$delim$productURL$delim$productImage\n");
         echo date("[h:i:s A]") . " => " . "Product [$productNo] has been saved to $resultFile!\n";
 
         set_time_limit(0);
